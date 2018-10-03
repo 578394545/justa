@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.justa.system.dao.WechatOfficialAccountsDao">
+
+	<select id="get" resultType="com.justa.system.domain.WechatOfficialAccountsDO">
+		select `id`,`name`,`wechatid`,`type`,`intro`,`certification`,`address`,`accountbody`,`heatrankings`,`isRecommend`,`logo` from tb_wechat_official_accounts where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.justa.system.domain.WechatOfficialAccountsDO">
+		select `id`,`name`,`wechatid`,`type`,`intro`,`certification`,`address`,`accountbody`,`heatrankings`,`isRecommend`,`logo` from tb_wechat_official_accounts
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="wechatid != null and wechatid != ''"> and wechatid = #{wechatid} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="intro != null and intro != ''"> and intro = #{intro} </if>
+		  		  <if test="certification != null and certification != ''"> and certification = #{certification} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="accountbody != null and accountbody != ''"> and accountbody = #{accountbody} </if>
+		  		  <if test="heatrankings != null and heatrankings != ''"> and heatrankings = #{heatrankings} </if>
+		  		  <if test="isRecommend != null and isRecommend != ''"> and isRecommend = #{isRecommend} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_wechat_official_accounts
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="wechatid != null and wechatid != ''"> and wechatid = #{wechatid} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="intro != null and intro != ''"> and intro = #{intro} </if>
+		  		  <if test="certification != null and certification != ''"> and certification = #{certification} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="accountbody != null and accountbody != ''"> and accountbody = #{accountbody} </if>
+		  		  <if test="heatrankings != null and heatrankings != ''"> and heatrankings = #{heatrankings} </if>
+                  <if test="isRecommend != null and isRecommend != ''"> and isRecommend = #{isRecommend} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.justa.system.domain.WechatOfficialAccountsDO" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_wechat_official_accounts
+		(
+			`name`, 
+			`wechatid`, 
+			`type`, 
+			`intro`, 
+			`certification`, 
+			`address`, 
+			`accountbody`,
+			`heatrankings`,
+			`isRecommend`,
+			`logo`
+		)
+		values
+		(
+			#{name}, 
+			#{wechatid}, 
+			#{type}, 
+			#{intro}, 
+			#{certification}, 
+			#{address}, 
+			#{accountbody},
+			#{heatrankings},
+			#{isRecommend},
+			#{logo}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.justa.system.domain.WechatOfficialAccountsDO">
+		update tb_wechat_official_accounts 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="wechatid != null">`wechatid` = #{wechatid}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="intro != null">`intro` = #{intro}, </if>
+			<if test="certification != null">`certification` = #{certification}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="accountbody != null">`accountbody` = #{accountbody}</if>
+			<if test="heatrankings != null"> and heatrankings = #{heatrankings} </if>
+            <if test="isRecommend != null"> and isRecommend = #{isRecommend} </if>
+            <if test="logo != null"> and logo = #{logo} </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_wechat_official_accounts where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_wechat_official_accounts where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+    <select id="getByWechatId" resultType="com.justa.system.domain.WechatOfficialAccountsDO">
+        select `id`,`name`,`wechatid`,`type`,`intro`,`certification`,`address`,`accountbody`,`heatrankings`,`isRecommend`,`logo` from tb_wechat_official_accounts where wechatid = #{value}
+    </select>
+</mapper>
