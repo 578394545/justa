@@ -190,17 +190,30 @@
         </dependency>
         <dependency>
             <groupId>com.dianping.cat</groupId>
-            <artifactId>cat-clien</artifactId>
+            <artifactId>cat-client</artifactId>
             <version>2.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/libs/cat-client-2.0.0.jar</systemPath>
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/src/main/resources/libs/cat-client-2.0.0.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>com.dianping.cat</groupId>
             <artifactId>cat-core</artifactId>
             <version>2.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/libs/cat-core-2.0.0.jar</systemPath>
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/src/main/resources/libs/cat-core-2.0.0.jar</systemPath>-->
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.21.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -243,25 +256,24 @@
     </build>
     <repositories>
         <repository>
-            <id>public</id>
-            <name>aliyun nexus</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>central</id>
+            <name>Maven2 Central Repository</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>unidal.releases</id>
+            <url>http://unidal.org/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>public</id>
-            <name>aliyun nexus</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>unidal.releases</id>
+            <url>http://unidal.org/nexus/content/repositories/releases/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
